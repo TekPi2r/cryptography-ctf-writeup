@@ -4,7 +4,8 @@ import itertools
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 combinations = itertools.product(chars, repeat=8)
 
-cipher = '??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d'
+# cipher = '??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d'
+cipher = "aa374a82db50b23aaaxi6b8811d976dd"
 
 # Print all combinations
 for combo in combinations:

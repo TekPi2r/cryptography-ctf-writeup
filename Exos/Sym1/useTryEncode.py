@@ -1,5 +1,6 @@
 import hashlib
 from Crypto.Cipher import AES
+import itertools
 
 
 
@@ -45,33 +46,33 @@ def get_aescbc_block2(plaintext, key, ciphertext):
 
 
 
-finalIv = "helloworlditsmee".encode()
-ciphertextRes = encode_aescbc(
-    "I was lost, but i find the solve",
-    hashlib.sha256("omgwtfbbq".encode()).digest(),
-    finalIv
-)
-print(ciphertextRes)
-# 33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb990832b9bab43c0d1308747d4330581c7afd
-# 33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596
-# a1558f179fdb990832b9bab43c0d1308747d4330581c7afd
+# Generate all combinations of 8 characters from a-z and 0-9
+chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+combinations = itertools.product(chars, repeat=8)
 
+# cipher = '??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d'
+cipher = "aa374a82db50b23aaaxi6b8811d976dd"
 
+# Print all combinations
+for combo in combinations:
+    new_cipher = list(cipher)  # Convert string to a list of characters to modify it
+    new_cipher[0] = combo[0]
+    new_cipher[1] = combo[1]
+    new_cipher[15] = combo[2]
+    new_cipher[16] = combo[3]
+    new_cipher[17] = combo[4]
+    new_cipher[18] = combo[5]
+    new_cipher[19] = combo[6]
+    new_cipher[20] = combo[7]
+    potential_cipher = ''.join(new_cipher)  # Convert list of characters back to a string
 
-ivRes = get_iv_string(
-    "I was lost, but i find the solve",
-    hashlib.sha256("omgwtfbbq".encode()).digest(),
-    ciphertextRes
-)
-print(ivRes)
-# ivRes value expected is "helloworlditsmee"
-
-
-
-block = get_aescbc_block2(
-    "I was lost, but ",
-    hashlib.sha256("omgwtfbbq".encode()).digest(),
-    "33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb990832b9bab43c0d1308747d4330581c7afd"
-)
-print(block)
-# Expected value "i find the solve"
+    try:
+        ivRes = get_iv_string(
+            "I was lost, but ",
+            hashlib.sha256("omgwtfbbq".encode()).digest(),
+            potential_cipher
+        )
+        if (len(ivRes) == 16):
+            print("potentialIvRes:", ivRes)
+    except Exception as e:
+        continue

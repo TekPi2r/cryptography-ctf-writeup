@@ -52,7 +52,8 @@ ciphertextRes = encode_aescbc(
     finalIv
 )
 print(ciphertextRes)
-# 33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb990832b9bab43c0d1308747d4330581c7afd
+print("len of ciphertext", len(ciphertextRes))
+print()
 # 33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596
 # a1558f179fdb990832b9bab43c0d1308747d4330581c7afd
 
@@ -64,6 +65,8 @@ ivRes = get_iv_string(
     ciphertextRes
 )
 print(ivRes)
+print("len of ivRes", len(ivRes))
+print()
 # ivRes value expected is "helloworlditsmee"
 
 
@@ -74,4 +77,5 @@ block = get_aescbc_block2(
     "33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb990832b9bab43c0d1308747d4330581c7afd"
 )
 print(block)
+print()
 # Expected value "i find the solve"
