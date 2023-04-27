@@ -19,5 +19,5 @@ with open('potential32_ciphers.txt', 'w') as f:
         new_cipher[19] = combo[6]
         new_cipher[20] = combo[7]
         potential_cipher = ''.join(new_cipher)  # Convert list of characters back to a string
-        # print(potential_cipher)
-        f.write(potential_cipher + '\n')  # Write cipher to file
+        print(potential_cipher)
+        # f.write(potential_cipher + '\n')  # Write cipher to file
