@@ -1,15 +1,27 @@
 import hashlib
 from Crypto.Cipher import AES
 import itertools
+import re
+
+
+
+def contains_letters(s):
+    # Define a regular expression pattern that matches any character from a to z, case-insensitive
+    pattern = re.compile(r'[a-zA-Z]')
+    # Search for the pattern in the input string
+    match = pattern.search(s)
+    # If a match is found, return True, otherwise return False
+    if match:
+        return True
+    else:
+        return False
 
 
 
 def encode_aescbc(plaintext, key, iv):
     bs = AES.block_size
-    # Pad the plaintext to a multiple of block size using PKCS#7 padding
-    padded_plaintext = plaintext.encode() + (bs - len(plaintext) % bs) * chr(bs - len(plaintext) % bs).encode()
     cipher = AES.new(key, AES.MODE_CBC, iv)
-    ciphertext = cipher.encrypt(padded_plaintext)
+    ciphertext = cipher.encrypt(plaintext.encode())
     # Encode the ciphertext in hexadecimal
     hex_ciphertext = ciphertext.hex()
     return hex_ciphertext
@@ -47,11 +59,11 @@ def get_aescbc_block2(plaintext, key, ciphertext):
 
 
 # Generate all combinations of 8 characters from a-z and 0-9
-chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+# chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+chars = 'abcdef0123456789'
 combinations = itertools.product(chars, repeat=8)
 
-# cipher = '??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d'
-cipher = "aa374a82db50b23aaaxi6b8811d976dd"
+cipher = '??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d'
 
 # Print all combinations
 for combo in combinations:
@@ -67,12 +79,23 @@ for combo in combinations:
     potential_cipher = ''.join(new_cipher)  # Convert list of characters back to a string
 
     try:
+        # potential_cipher = "33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb9908"
+        # print("Try potentialCipher:", potential_cipher)
+        # print(len(potential_cipher))
         ivRes = get_iv_string(
             "I was lost, but ",
             hashlib.sha256("omgwtfbbq".encode()).digest(),
             potential_cipher
         )
-        if (len(ivRes) == 16):
+        # print("potentialIvRes:", ivRes)
+
+        block = get_aescbc_block2(
+            "I was lost, but ",
+            hashlib.sha256("omgwtfbbq".encode()).digest(),
+            potential_cipher
+        )
+        if contains_letters(block):
+            print("potentialBlock:", block)
             print("potentialIvRes:", ivRes)
     except Exception as e:
         continue

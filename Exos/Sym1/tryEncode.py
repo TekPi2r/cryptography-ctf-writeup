@@ -60,7 +60,7 @@ print()
 
 
 ivRes = get_iv_string(
-    "I was lost, but i find the solve",
+    "I was lost, but ",
     hashlib.sha256("omgwtfbbq".encode()).digest(),
     ciphertextRes
 )
@@ -74,7 +74,7 @@ print()
 block = get_aescbc_block2(
     "I was lost, but ",
     hashlib.sha256("omgwtfbbq".encode()).digest(),
-    "33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb990832b9bab43c0d1308747d4330581c7afd"
+    "33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb9908"
 )
 print(block)
 print()
