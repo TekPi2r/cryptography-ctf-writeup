@@ -5,10 +5,8 @@ from Crypto.Cipher import AES
 
 def encode_aescbc(plaintext, key, iv):
     bs = AES.block_size
-    # Pad the plaintext to a multiple of block size using PKCS#7 padding
-    padded_plaintext = plaintext.encode() + (bs - len(plaintext) % bs) * chr(bs - len(plaintext) % bs).encode()
     cipher = AES.new(key, AES.MODE_CBC, iv)
-    ciphertext = cipher.encrypt(padded_plaintext)
+    ciphertext = cipher.encrypt(plaintext.encode())
     # Encode the ciphertext in hexadecimal
     hex_ciphertext = ciphertext.hex()
     return hex_ciphertext
@@ -42,6 +40,8 @@ def get_aescbc_block2(plaintext, key, ciphertext):
     # Extract the desired block from the decrypted plaintext and return it
     block = decrypted_plaintext[bs:2*bs]
     return block.decode()
+
+
 
 
 
