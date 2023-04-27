@@ -9,3 +9,12 @@ Is there any way you can help me recover it? It's at: /ch2.bmp
 And I have a bonus point for you if you explain why it was a bad idea to xor-encrypt *this* file...
 "Merci les loulous"
 Mettre key plus longue que BMP Header / Avec les 00 on peux voir que ça se répéte et trouver la clé / + Supposer début du header 'BM' 'FF FF'(taille du fichier en hex) '00 00'(réservé)
+
+### BASIC4:
+
+Oh no, I was browsing the internet and I accidentally xor-encrypted a very important picture, I'm
+not sure how... I panicked and I closed the tab I was on, and now I can't find it again!
+
+I need the picture, and I'll give you a bonus if you can find the tab I was on!
+
+/basic4.webp
