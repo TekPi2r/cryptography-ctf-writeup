@@ -1,8 +1,8 @@
 import threading
 import hashlib
 from Crypto.Cipher import AES
-import itertools
 import re
+import random
 
 
 
@@ -59,8 +59,10 @@ def get_aescbc_block2(plaintext, key, ciphertext):
 
 new_cipher = list('??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d')
 
-def generate_hex_values(start, end):
-    for i in range(start, end):
+def generate_hex_values(start, end, threadId):
+    print("ThreadId:", threadId)
+    while True:
+        i = random.randint(start, end)
         hex_val = hex(i)[2:].zfill(8)
         new_cipher[0] = hex_val[0]
         new_cipher[1] = hex_val[1]
@@ -90,11 +92,12 @@ def generate_hex_values(start, end):
             if contains_letters(block):
                 print("potentialBlock:", block)
                 print("potentialIvRes:", ivRes)
+                break
         except Exception as e:
-            continue
+            pass
 
 # Split the work among 4 threads
-num_threads = 256
+num_threads = 1024
 total_values = 256**4
 values_per_thread = total_values // num_threads
 
@@ -103,7 +106,7 @@ threads = []
 for i in range(num_threads):
     start = i * values_per_thread
     end = (i + 1) * values_per_thread
-    t = threading.Thread(target=generate_hex_values, args=(start, end))
+    t = threading.Thread(target=generate_hex_values, args=(start, end, i))
     threads.append(t)
     t.start()
 
