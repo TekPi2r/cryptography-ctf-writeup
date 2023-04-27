@@ -3,17 +3,17 @@ import hashlib
 from Crypto.Cipher import AES
 import threading
 
-plaintext = "I was lost, but ????????????????"
+plaintext = "I was lost, but "
 bs = AES.block_size
 key = hashlib.sha256("omgwtfbbq".encode()).digest()
-knownciphertext = "374a82db50b"
-knownciphertext2 = "b8811d976ddc1cf6db4524aac04e222853969367e0d"
+knownciphertext = "374a82db50b23"
+knownciphertext2 = "b8811d976dd"
 
 def test_ivs(start, end, threadId):
     print(threadId, " test ", start, end)
     for i in range(start, end):
         iv = i.to_bytes(16, byteorder='big')
-        print(threadId, " test ", iv)
+        # print(threadId, " test ", iv)
         cipher = AES.new(key, AES.MODE_CBC, iv)
         ciphertext = cipher.encrypt(plaintext.encode())
         hex_ciphertext = ''.join(format(x,'02x') for x in ciphertext)
@@ -24,7 +24,7 @@ def test_ivs(start, end, threadId):
             return
 
 # split the loop into 4 threads
-num_threads = 512
+num_threads = 256
 total_ivs = 256 ** 16
 ivs_per_thread = total_ivs // num_threads
 

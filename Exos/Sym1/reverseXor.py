@@ -2,24 +2,15 @@ import hashlib
 from Crypto.Cipher import AES
 
 # Known values
-plaintext = "I wa"
+plaintext = "I was lost, but "
 key = hashlib.sha256("omgwtfbbq".encode()).digest()
+ciphertext = "aa374a82db50b23aaaaafb8811d976dd".encode()
 
-# Read ciphertext from file
-with open('potential16_ciphers.txt') as f:
-    ciphertexts = f.read().splitlines()
+# Decrypt first block of ciphertext
+cipher = AES.new(key, AES.MODE_CBC, ciphertext[:AES.block_size])
+decrypted_block = cipher.decrypt(ciphertext[:AES.block_size])
 
-# Get IV Function
-def get_iv(key, plaintext, ciphertext):
-    # Decrypt first block of ciphertext
-    cipher = AES.new(key, AES.MODE_CBC, ciphertext)
-    decrypted_block = cipher.decrypt(ciphertext)
-    
-    # XOR decrypted block with plaintext to obtain IV
-    iv = bytes([decrypted_block[i] ^ plaintext[i] for i in range(16)])
-    return iv.hex()
+# XOR decrypted block with plaintext to obtain IV
+iv = bytes([decrypted_block[i] ^ ord(plaintext[i]) for i in range(AES.block_size)])
 
-# Iterate over ciphertexts and try to find the IV
-for ciphertext in ciphertexts:
-    iv = get_iv(key, plaintext.encode(), ciphertext)
-    print(iv)
+print(iv.hex())
