@@ -7,3 +7,10 @@ Well done ! The flag for this challenge is this message.
 ### BASIC3: I accidentally XOR-encrypted this file...
 Is there any way you can help me recover it? It's at: /ch2.bmp
 And I have a bonus point for you if you explain why it was a bad idea to xor-encrypt *this* file...
+
+## Hash     /       ### EASY HASHY
+Ooops, I got carried away and hashed my super-secret password. Now I can't find it again ! Please,
+help me ! Here's the hash: 37f62f1363b04df4370753037853fe88
+https://crackstation.net
+7f62f1363b04df4370753037853fe88     md5     trololo
+
