@@ -3,6 +3,16 @@ from Crypto.Cipher import AES
 
 
 
+def xor(plaintext, payload):
+    len_PT = len(plaintext)
+    res = []
+
+    for i in range(0, len(payload)):
+        res.append(payload[i] ^ plaintext[i % len_PT])
+    return bytes(res)
+
+
+
 def encode_aescbc(plaintext, key, iv):
     bs = AES.block_size
     cipher = AES.new(key, AES.MODE_CBC, iv)
@@ -27,6 +37,16 @@ def get_iv_string(plaintext, key, ciphertext):
 
 
 
+def new_get_iv_string(plaintext, key, ciphertext):
+    bs = AES.block_size
+    ciphertextBytes = bytes.fromhex(ciphertext)
+    cipher = AES.new(key, AES.MODE_ECB)
+    payload = cipher.decrypt(ciphertextBytes)
+    iv = xor(plaintext, payload).decode()
+    return iv
+
+
+
 def get_aescbc_block2(plaintext, key, ciphertext):
     bs = AES.block_size
     # Decode the hexadecimal-encoded ciphertext to bytes
@@ -45,7 +65,7 @@ def get_aescbc_block2(plaintext, key, ciphertext):
 
 
 
-finalIv = "helloworlditsmee".encode()
+finalIv = "aaaaaaaaaaaaaaaa".encode()
 ciphertextRes = encode_aescbc(
     "I was lost, but i find the solve",
     hashlib.sha256("omgwtfbbq".encode()).digest(),
@@ -59,15 +79,22 @@ print()
 
 
 
-ivRes = get_iv_string(
-    "I was lost, but ",
+# ivRes = get_iv_string(
+#     "I was lost, but ",
+#     hashlib.sha256("omgwtfbbq".encode()).digest(),
+#     ciphertextRes
+# )
+# print(ivRes)
+# print("len of ivRes", len(ivRes))
+# print()
+ivRes = new_get_iv_string(
+    b"I was lost, but ",
     hashlib.sha256("omgwtfbbq".encode()).digest(),
-    ciphertextRes
+    ciphertextRes[:32]
 )
 print(ivRes)
-print("len of ivRes", len(ivRes))
 print()
-# ivRes value expected is "helloworlditsmee"
+# ivRes value expected is "aaaaaaaaaaaaaaaa"
 
 
 

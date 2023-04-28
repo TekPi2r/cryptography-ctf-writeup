@@ -5,6 +5,16 @@ import re
 
 
 
+def xor(plaintext, payload):
+    len_PT = len(plaintext)
+    res = []
+
+    for i in range(0, len(payload)):
+        res.append(payload[i] ^ plaintext[i % len_PT])
+    return bytes(res)
+
+
+
 def contains_letters(s):
     # Define a regular expression pattern that matches any character from a to z, case-insensitive
     pattern = re.compile(r'[a-zA-Z]')
@@ -28,21 +38,17 @@ def encode_aescbc(plaintext, key, iv):
 
 
 
-def get_iv_string(plaintext, key, ciphertext):
+def new_get_iv_string(plaintext, key, ciphertext):
     bs = AES.block_size
-    # Decode the hexadecimal-encoded ciphertext
-    ciphertext = bytes.fromhex(ciphertext)
-    # Extract the IV from the first block of the ciphertext
-    iv = ciphertext[:bs]
-    cipher = AES.new(key, AES.MODE_CBC, iv)
-    # Decrypt the first block of the ciphertext to get the original IV
-    decrypted_block = cipher.decrypt(ciphertext[:bs])
-    iv_string = ''.join([chr(decrypted_block[i] ^ iv[i] ^ plaintext.encode()[i]) for i in range(bs)])
-    return iv_string
+    ciphertextBytes = bytes.fromhex(ciphertext)
+    cipher = AES.new(key, AES.MODE_ECB)
+    payload = cipher.decrypt(ciphertextBytes)
+    iv = xor(plaintext, payload).decode()
+    return iv
 
 
 
-def get_aescbc_block2(plaintext, key, ciphertext):
+def get_aescbc_block2(key, ciphertext):
     bs = AES.block_size
     # Decode the hexadecimal-encoded ciphertext to bytes
     ciphertext = bytes.fromhex(ciphertext)
@@ -61,41 +67,33 @@ def get_aescbc_block2(plaintext, key, ciphertext):
 # Generate all combinations of 8 characters from a-z and 0-9
 # chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
 chars = '0123456789abcdef'
-combinations = itertools.product(chars, repeat=8)
+combinations = itertools.product(chars, repeat=7)
 
-cipher = '??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d'
+cipher = '??f374a82db50b23?????b88f1d976dd'
 
 # Print all combinations
 for combo in combinations:
-    new_cipher = list(cipher)  # Convert string to a list of characters to modify it
-    new_cipher[0] = combo[0]
-    new_cipher[1] = combo[1]
-    new_cipher[15] = combo[2]
-    new_cipher[16] = combo[3]
-    new_cipher[17] = combo[4]
-    new_cipher[18] = combo[5]
-    new_cipher[19] = combo[6]
-    new_cipher[20] = combo[7]
-    potential_cipher = ''.join(new_cipher)  # Convert list of characters back to a string
-
+    potential_cipher = f"{combo[0] + combo[1]}f374a82db50b23{combo[2] + combo[3] + combo[4] + combo[5] + combo[6]}b88f1d976dd"
     try:
         # potential_cipher = "33bbe5c24d95e1e0d0afc0909935ffa46b5ec48878b21596a1558f179fdb9908"
         # print("Try potentialCipher:", potential_cipher)
         # print(len(potential_cipher))
-        ivRes = get_iv_string(
-            "I was lost, but ",
+        ivRes = new_get_iv_string(
+            b"I was lost, but ",
             hashlib.sha256("omgwtfbbq".encode()).digest(),
             potential_cipher
         )
-        # print("potentialIvRes:", ivRes)
+        if ivRes.isprintable() and len(ivRes) == 16:
+            print("potentialIvRes:", ivRes)
+            # h4ppyh4ppya5canB
+            print("potentialCipher", potential_cipher)
+            # 02f374a82db50b23a7d09b88f1d976dd
+            block = get_aescbc_block2(
+                hashlib.sha256("omgwtfbbq".encode()).digest(),
+                potential_cipher + "c1cf6db4524aac04e222853969367e0d"
+            )
+            print(block)
+            print()
 
-        block = get_aescbc_block2(
-            "I was lost, but ",
-            hashlib.sha256("omgwtfbbq".encode()).digest(),
-            potential_cipher
-        )
-        # if contains_letters(block):
-        print("potentialBlock:", block)
-        print("potentialIvRes:", ivRes)
     except Exception as e:
         continue
