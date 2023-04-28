@@ -60,7 +60,7 @@ def get_aescbc_block2(plaintext, key, ciphertext):
 
 # Generate all combinations of 8 characters from a-z and 0-9
 # chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
-chars = 'abcdef0123456789'
+chars = '0123456789abcdef'
 combinations = itertools.product(chars, repeat=8)
 
 cipher = '??374a82db50b23??????b8811d976ddc1cf6db4524aac04e222853969367e0d'
@@ -94,8 +94,8 @@ for combo in combinations:
             hashlib.sha256("omgwtfbbq".encode()).digest(),
             potential_cipher
         )
-        if contains_letters(block):
-            print("potentialBlock:", block)
-            print("potentialIvRes:", ivRes)
+        # if contains_letters(block):
+        print("potentialBlock:", block)
+        print("potentialIvRes:", ivRes)
     except Exception as e:
         continue

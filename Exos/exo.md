@@ -23,10 +23,14 @@ not sure how... I panicked and I closed the tab I was on, and now I can't find i
 I need the picture, and I'll give you a bonus if you can find the tab I was on!
 
 /basic4.webp
+https://hexed.it
+https://stackoverflow.com/questions/45321665/magic-number-for-google-image-format
+https://www.google.com/search?q=webp+magic+number&oq=webp+magic+number&aqs=chrome.0.69i59.3110j0j7&sourceid=chrome&ie=UTF-8
 
 
 
-## Hash     /       ### EASY HASHY
+## ======== Hash ========
+### EASY HASHY
 Ooops, I got carried away and hashed my super-secret password. Now I can't find it again ! Please,
 help me ! Here's the hash: 37f62f1363b04df4370753037853fe88
 https://crackstation.net
@@ -35,7 +39,18 @@ https://crackstation.net
 
 
 
-## RSA      /       ### RSA1: Warm up
+## ==== Symmetric ====
+### SYM1:
+Oh no, I qust lost the IV we use for every encrypted file in our production system... All I have is
+a screenshot of one time i encrypted some data with it, but the screenshot got edited by a l337
+hacker! Can you help me?
+
+The screenshot is here: /ch3.qpg
+
+
+
+## ======== RSA ========
+### RSA1: Warm up
 Let's see if you got my class. Download /rsa1.pem, it's a public key.
 Now download /rsa1Cipher.txt
 The message was encrypted using the "PKCS1 OAEP" algorithm with this public key. Try decrypting it.
@@ -45,3 +60,7 @@ p = 1190123446149422831006407612148203828642965008920896922987618400734995678209
 ➜  RSA1 git:(master) ✗ python3 decodeCipher.py
 [Good job! Next chall: /rsa2ez4me.zip]
 
+
+
+### RSA2: ManyKeys
+Find the challenge yourself.
