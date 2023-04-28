@@ -47,6 +47,11 @@ hacker! Can you help me?
 
 The screenshot is here: /ch3.qpg
 
+Use "useTryEncode.py"
+completeCipher is: 02f374a82db50b23a7d09b88f1d976ddc1cf6db4524aac04e222853969367e0d
+potentialIvRes: h4ppyh4ppya5canB
+potentialCipher 02f374a82db50b23a7d09b88f1d976dd
+now I'm found...
 
 
 ## ======== RSA ========
