@@ -39,6 +39,30 @@ https://crackstation.net
 
 
 
+### CONFESSIONS
+Noting the darkness of your souls, the Admin, may his name be sanctified, has decided to come to the
+aid of your souls in perdition: A confessional is now available within this CTF â›ª You can now
+unburden your souls of its heaviest secrets, inevitable sins accumulated during your intrusions on
+the so fragile little websites of our platform ðŸ™
+
+I was qust informed that a suspicious individual was seen leaving, who did not remind us of any of
+your faces. What dark secret could he have confided? ðŸ•µ We are sure he is of great value, but only
+God will know, for our service is inviolable! ðŸ’ªðŸ”’
+
+confessions.crypto.blackfoot.io
+## Answer
+https://www.youtube.com/watch?v=zxY_GdW6WdY&t=328s
+Use Basic Enumeration
+https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/graphql
+Send Basic Enumeration with postman
+https://cloudy-crater-1565.postman.co/workspace/2d48321b-a07a-4ee2-8d15-73a228c203d7/request/13154279-fc3aa0d8-cdcb-4536-95c7-98bdf2abbde6
+Send get requestLog to have "requestLog.json"
+Use "getHash.py" to have all hash of confession
+Use "decryptHash.py" to use all hash to get the flag
+# The flag is: "ZOB{plz_d0nt_t3ll_any1}"
+
+
+
 ## ==== Symmetric ====
 ### SYM1:
 Oh no, I qust lost the IV we use for every encrypted file in our production system... All I have is
@@ -48,10 +72,10 @@ hacker! Can you help me?
 The screenshot is here: /ch3.qpg
 
 Use "useTryEncode.py"
-completeCipher is: 02f374a82db50b23a7d09b88f1d976ddc1cf6db4524aac04e222853969367e0d
-potentialIvRes: h4ppyh4ppya5canB
-potentialCipher 02f374a82db50b23a7d09b88f1d976dd
-now I'm found...
+# completeCipher is: 02f374a82db50b23a7d09b88f1d976ddc1cf6db4524aac04e222853969367e0d
+# potentialIvRes: h4ppyh4ppya5canB
+# potentialCipher 02f374a82db50b23a7d09b88f1d976dd
+# now I'm found...
 
 
 ## ======== RSA ========
