@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=1d0a3b&height=200&section=header&text=Cryptography%20CTF%20-%20EPITECH%202024&fontSize=40&fontColor=ffffff" alt="banner"/>
-</p>
-
 # 🔐 Cryptography CTF - EPITECH 2024
 
 ## 📜 Introduction
