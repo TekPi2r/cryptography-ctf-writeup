@@ -3,6 +3,7 @@
 ## 📜 Introduction
 
 Projet réalisé dans le cadre du module **M - Cryptography (M-SEC-903)** en 5ème année à Epitech Paris.
+Validé Grade A
 
 L’objectif était de résoudre une série progressive de **challenges en cryptographie**, couvrant :
 - Chiffrement symétrique
