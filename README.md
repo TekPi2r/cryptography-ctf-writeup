@@ -38,10 +38,6 @@ L’objectif était de résoudre une série progressive de **challenges en crypt
 
 ---
 
-## 📌 Autres projets
-
-Retrouvez ce projet et d'autres sur mon [GitHub](https://github.com/pierre-dallara).
-
 ---
 
 ## 🚨 Disclaimer
